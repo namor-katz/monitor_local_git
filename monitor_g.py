@@ -27,19 +27,6 @@ def get_git_status(dir_path):
     tmp2 = os.path.join(full_path, dir_path)
     if tmp2 is None:
         return False
-    # untracked
-    '''
-    repo = git.Repo(tmp2,  search_parent_directories=True)
-    a = repo.untracked_files # это только неотслеживаемые. измененные оно не видит!!
-    print("Я мощныа А ", a)
-    print("перед лен")
-    if len(a) > 0:
-        return True
-    else:
-        return False
-        '''
-    # modified, пока только для файлов missing
-    #print("после лен")
     g = git.cmd.Git(tmp2)
     e = g.execute(['git', 'status'])
     if 'modified' in e:
