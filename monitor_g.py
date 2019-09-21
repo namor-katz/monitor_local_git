@@ -15,7 +15,7 @@ import pickledb
 #define base variables
 home_dir = os.path.expanduser('~')
 git_dir = "gits"
-full_path = os.path.join(home_dir, git_dir)
+full_path = os.path.join(home_dir, git_dir) # hardcode, from test
 
 
 # base work git
@@ -27,13 +27,19 @@ def get_git_status(dir_path):
     tmp2 = os.path.join(full_path, dir_path)
     if tmp2 is None:
         return False
+
     g = git.cmd.Git(tmp2)
-    e = g.execute(['git', 'status'])
-    if 'modified' in e:
-        print(tmp2, 'модифицирован!')
-        return True
-    else:
+    try:
+        e = g.execute(['git', 'status'])
+        if 'modified' in e:
+            print(tmp2, 'модифицирован!')
+            return True
+        else:
+            return False
+
+    except (git.exc.GitCommandError, NotADirectoryError) as e:
         return False
+
 
 #base work files
 def get_time(fname):
@@ -49,7 +55,7 @@ def get_time(fname):
 
 if __name__ == "__main__":
     list_dirs = os.listdir(full_path)
-    #TODOS: обрабатывать если гитов нет.
     for i in list_dirs:
+        #print(i)
         get_git_status(i)
 
