@@ -32,7 +32,7 @@ def get_git_status(dir_path):
     try:
         e = g.execute(['git', 'status'])
         if 'modified' in e:
-            print(tmp2, 'модифицирован!')
+            #print(tmp2, 'модифицирован!')
             return True
         else:
             return False
