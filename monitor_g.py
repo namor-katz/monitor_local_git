@@ -8,8 +8,8 @@
 import os
 import argparse
 import git
-import shutil
-import pickledb
+#import shutil
+#import pickledb
 
 
 #define base variables
